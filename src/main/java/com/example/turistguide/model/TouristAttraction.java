@@ -12,7 +12,7 @@ public class TouristAttraction {
     }
 
     public String getName() { return name; }
-    public String description() { return description; }
+    public String getDescription() { return description; }
 
     public void setName(String name) { this.name = name; }
     public void setDescription(String description) { this.description = description; }
