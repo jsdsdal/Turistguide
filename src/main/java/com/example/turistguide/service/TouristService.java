@@ -1,7 +1,8 @@
 package com.example.turistguide.service;
 
 import com.example.turistguide.model.TouristAttraction;
-import com.example.turistguide.repository.Touristrepository;
+import com.example.turistguide.repository.TouristRepository;
+import com.example.turistguide.repository.TouristRepository;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class TouristService {
     }
 
     public List<TouristAttraction> getTouristAttractions(){
-        return Touristrepository.getTouristAttractions();
+        return repository.getTouristAttractions();
 
     }
 
