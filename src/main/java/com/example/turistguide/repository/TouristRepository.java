@@ -37,13 +37,25 @@ public class TouristRepository {
 
     // opdaterer turistattraktion
     public void updateTouristAttraction (TouristAttraction touristAttraction, String name, String description) {
-        if (name != null){
+        if (name != null && description != null){
             touristAttraction.setName(name);
-        }
-        else if (description != null){
             touristAttraction.setDescription(description);
         }
        }
+
+    // opdaterer kun navn
+    public void updateTouristAttractionName (TouristAttraction touristAttraction, String name) {
+        if (name != null) {
+            touristAttraction.setName(name);
+        }
+    }
+
+    // opdaterer beskrivelse
+    public void updateTouristAttractionDescription (TouristAttraction touristAttraction, String description) {
+        if (description != null) {
+            touristAttraction.setName(description);
+        }
+    }
 
     // generic remove
     public void removeTouristAttraction(TouristAttraction touristAttraction) { touristAttractions.remove(touristAttraction); }
