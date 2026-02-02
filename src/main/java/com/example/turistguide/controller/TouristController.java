@@ -5,14 +5,11 @@ import com.example.turistguide.service.TouristService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("attractions")
 public class TouristController {
     private final TouristService service;
@@ -36,9 +33,12 @@ public class TouristController {
             return new ResponseEntity<>(touristAttraction, HttpStatus.OK);
         }
     }
-//
-//    @PostMapping("add")
-//    public ResponseEntity<TouristAttraction> addTouristAttraction()
+
+    @PostMapping("add")
+    public ResponseEntity<TouristAttraction> addTouristAttraction(@RequestBody TouristAttraction touristAttraction){
+        TouristAttraction addedTouristAttraction = service.addTouristAttraction(touristAttraction);
+        return ResponseEntity.ok(touristAttraction);
+    }
 
 
 
