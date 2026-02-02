@@ -40,6 +40,12 @@ public class TouristController {
         return ResponseEntity.ok(touristAttraction);
     }
 
+    @PostMapping("update")
+    public ResponseEntity<TouristAttraction> updateTouristAttraction(@RequestBody TouristAttraction touristAttraction, String name, String description){
+        TouristAttraction updatedTouristAttraction = service.updateTouristAttraction(touristAttraction, name, description);
+        return ResponseEntity.ok(updatedTouristAttraction);
+    }
+
 
 
 
