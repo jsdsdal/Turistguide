@@ -1,0 +1,19 @@
+:root {
+    --bordeaux:#59221A;
+    --matadorred:#D84051;
+    --skyblue:#8BC1D1;
+    --moneygreen:#358A69;
+    --mustardyellow:#D1A15B;
+    --sitewhite:#F1EDE4;
+    --textblack:#2D1D1D;
+}
+
+body{
+    background-color: var(--sitewhite);
+    color: var(--textblack);
+    font-family: "Roboto Light", sans-serif;
+}
+
+
+
+
