@@ -27,21 +27,21 @@ public class TouristService {
     public TouristAttraction addTouristAttraction(TouristAttraction touristAttraction){
         return repository.addTouristAttraction(touristAttraction);
     }
-    
+
     public TouristAttraction updateTouristAttraction(TouristAttraction touristAttraction, String name, String description){
         repository.updateTouristAttraction(touristAttraction, name, description);
         return touristAttraction;
     }
-    
-    public void updateTouristAttractionName(TouristAttraction touristAttraction, String name) {
+
+    public TouristAttraction updateTouristAttractionName(TouristAttraction touristAttraction, String name) {
         repository.updateTouristAttractionName(touristAttraction, name);
+        return touristAttraction;
     }
 
-    public void updateTouristAttractionDescription(TouristAttraction touristAttraction, String description) {
+    public TouristAttraction updateTouristAttractionDescription(TouristAttraction touristAttraction, String description) {
         repository.updateTouristAttractionDescription(touristAttraction, description);
-
+        return touristAttraction;
     }
-
 
 
     }

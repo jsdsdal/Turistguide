@@ -46,6 +46,18 @@ public class TouristController {
         return ResponseEntity.ok(updatedTouristAttraction);
     }
 
+    @PostMapping("update.name")
+    public ResponseEntity<TouristAttraction> updateTouristAttractionName(@RequestBody TouristAttraction touristAttraction, String name){
+        TouristAttraction updatedTouristAttraction = service.updateTouristAttractionName(touristAttraction, name);
+        return ResponseEntity.ok(updatedTouristAttraction);
+    }
+
+    @PostMapping("update.description")
+    public ResponseEntity<TouristAttraction> updateTouristAttractionDescription(@RequestBody TouristAttraction touristAttraction, String description){
+        TouristAttraction updatedTouristAttraction = service.updateTouristAttractionDescription(touristAttraction, description);
+        return ResponseEntity.ok(updatedTouristAttraction);
+    }
+
 
 
 
