@@ -3,9 +3,11 @@ package com.example.turistguide.service;
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.repository.TouristRepository;
 import com.example.turistguide.repository.TouristRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class TouristService {
 
     private final TouristRepository repository;
@@ -19,12 +21,12 @@ public class TouristService {
 
     }
 
-    public TouristAttraction getTouristAttractionByName(String name, String caps) {
-        TouristAttraction touristAttraction = repository.getTouristAttractionByName(name);
-        if (caps != null && caps.equals("yes")) {
-            return new TouristAttraction(touristAttraction.getName(), touristAttraction.getDescription().toUpperCase());
-        }
-        return touristAttraction;
+    public TouristAttraction getTouristAttractionByName(String name) {
+        return repository.getTouristAttractionByName(name);
+    }
+
+    public TouristAttraction addTouristAttraction(TouristAttraction touristAttraction){
+        return repository.addTouristAttraction(touristAttraction);
     }
 
 

@@ -25,7 +25,7 @@ public class TouristRepository {
     // getter til navn
     public TouristAttraction getTouristAttractionByName(String name) {
         for (TouristAttraction touristAttraction : touristAttractions) {
-            if (touristAttraction.getName() == name) {
+            if (touristAttraction.getName().equalsIgnoreCase(name)) {
                 return touristAttraction;
             }
         }
@@ -33,7 +33,7 @@ public class TouristRepository {
     }
 
     // tilføjer turistattraktion
-    public void addTouristAttraction(TouristAttraction touristAttraction) { touristAttractions.add(touristAttraction); }
+    public TouristAttraction addTouristAttraction(TouristAttraction touristAttraction) { touristAttractions.add(touristAttraction); return touristAttraction; }
 
     // opdaterer turistattraktion
     public void updateTouristAttraction (TouristAttraction touristAttraction, String name, String description) {
