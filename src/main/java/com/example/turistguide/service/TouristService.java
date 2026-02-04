@@ -43,5 +43,9 @@ public class TouristService {
         return touristAttraction;
     }
 
+    public TouristAttraction deleteByName(String name){
+        return repository.deleteByName(name);
+    }
+
 
     }

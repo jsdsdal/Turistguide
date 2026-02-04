@@ -45,4 +45,15 @@ public class TouristController {
         TouristAttraction updatedTouristAttraction = service.updateTouristAttraction(touristAttraction, name, description);
         return ResponseEntity.ok(updatedTouristAttraction);
     }
+
+
+    @PostMapping("{name}")
+    public ResponseEntity<TouristAttraction> deleteByName(@PathVariable String name) {
+        TouristAttraction touristAttraction = service.deleteByName(name);
+        if (touristAttraction==null) {
+            return new ResponseEntity<>(touristAttraction, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(touristAttraction, HttpStatus.OK);
+        }
+    }
 }
