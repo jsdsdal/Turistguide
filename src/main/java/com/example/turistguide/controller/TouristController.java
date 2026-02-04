@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("attractions")
 public class TouristController {
     private final TouristService service;
@@ -56,4 +56,5 @@ public class TouristController {
             return new ResponseEntity<>(touristAttraction, HttpStatus.OK);
         }
     }
+
 }
