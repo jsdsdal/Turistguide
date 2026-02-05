@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="da" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${attraction.name}">Turistattraktion</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<header>
+    <h1>Matador Turistguide</h1>
+</header>
+
+<section>
+    <h2 th:text="${attraction.name}">
+        Attraktionens navn
+    </h2>
+
+    <p th:text="${attraction.description}">
+        Attraktionens beskrivelse her
+    </p>
+</section>
+
+<a href="/">Tilbage</a>
+
+</body>
+</html>

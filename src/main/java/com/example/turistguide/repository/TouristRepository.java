@@ -67,7 +67,7 @@ public class TouristRepository {
     public void removeTouristAttraction(TouristAttraction touristAttraction) { touristAttractions.remove(touristAttraction); }
 
     // remove by name
-    public void deleteByName(String name) {
+    public TouristAttraction deleteByName(String name) {
         TouristAttraction deletedAttraction = touristAttractions.get(0);
 
         for (TouristAttraction touristAttraction : touristAttractions) {
@@ -76,6 +76,7 @@ public class TouristRepository {
             }
         }
         removeTouristAttraction(deletedAttraction);
+        return deletedAttraction;
     }
 
 }

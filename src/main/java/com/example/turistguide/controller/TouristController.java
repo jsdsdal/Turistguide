@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("attractions")
 public class TouristController {
     private final TouristService service;
@@ -47,4 +47,16 @@ public class TouristController {
         System.out.println(updatedTouristAttraction + " <-- updated object object");
         return ResponseEntity.ok(updatedTouristAttraction);
     }
+
+
+    @PostMapping("{name}")
+    public ResponseEntity<TouristAttraction> deleteByName(@PathVariable String name) {
+        TouristAttraction touristAttraction = service.deleteByName(name);
+        if (touristAttraction==null) {
+            return new ResponseEntity<>(touristAttraction, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(touristAttraction, HttpStatus.OK);
+        }
+    }
+
 }
