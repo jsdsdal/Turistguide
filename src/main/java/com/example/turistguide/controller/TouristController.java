@@ -1,6 +1,7 @@
 package com.example.turistguide.controller;
 
 import com.example.turistguide.model.TouristAttraction;
+import com.example.turistguide.model.UpdateAttractionRequest;
 import com.example.turistguide.service.TouristService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,6 @@ import java.util.List;
 @RequestMapping("attractions")
 public class TouristController {
     private final TouristService service;
-
     public TouristController(TouristService service) {
         this.service = service;
     }
@@ -41,8 +41,10 @@ public class TouristController {
     }
 
     @PostMapping("update")
-    public ResponseEntity<TouristAttraction> updateTouristAttraction(@RequestBody TouristAttraction touristAttraction, String name, String description){
-        TouristAttraction updatedTouristAttraction = service.updateTouristAttraction(touristAttraction, name, description);
+    public ResponseEntity<UpdateAttractionRequest> updateTouristAttraction(@RequestBody UpdateAttractionRequest request, String name, String description){
+        System.out.println(request + " <-- initial object");
+        UpdateAttractionRequest updatedTouristAttraction = service.updateTouristAttraction(request, request.getNewName(), request.getNewDescription());
+        System.out.println(updatedTouristAttraction + " <-- updated object object");
         return ResponseEntity.ok(updatedTouristAttraction);
     }
 }

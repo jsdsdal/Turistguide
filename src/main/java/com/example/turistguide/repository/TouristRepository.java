@@ -2,6 +2,7 @@ package com.example.turistguide.repository;
 
 
 import com.example.turistguide.model.TouristAttraction;
+import com.example.turistguide.model.UpdateAttractionRequest;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -36,10 +37,15 @@ public class TouristRepository {
     public TouristAttraction addTouristAttraction(TouristAttraction touristAttraction) { touristAttractions.add(touristAttraction); return touristAttraction; }
 
     // opdaterer turistattraktion
-    public void updateTouristAttraction (TouristAttraction touristAttraction, String name, String description) {
+    public void updateTouristAttraction (UpdateAttractionRequest touristAttraction, String name, String description) {
         if (name != null && description != null){
-            touristAttraction.setName(name);
-            touristAttraction.setDescription(description);
+
+            for (TouristAttraction element : touristAttractions) {
+                if (element.getName().equalsIgnoreCase(touristAttraction.getNewName())) {
+                    touristAttraction.setNewName(name);
+                    touristAttraction.setNewDescription(description);
+                }
+            }
         }
        }
 
