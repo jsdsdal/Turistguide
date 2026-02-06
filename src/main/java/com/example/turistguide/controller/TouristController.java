@@ -2,6 +2,7 @@ package com.example.turistguide.controller;
 
 import com.example.turistguide.model.TouristAttraction;
 import com.example.turistguide.model.UpdateAttractionRequest;
+import com.example.turistguide.service.LoggedUserManagementService;
 import com.example.turistguide.service.TouristService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,23 +15,46 @@ import java.util.List;
 @Controller
 public class TouristController {
     private final TouristService service;
-    public TouristController(TouristService service) {
+    private final LoggedUserManagementService loggedUserManagementService;
+
+    public TouristController(TouristService service, LoggedUserManagementService loggedUserManagementService) {
         this.service = service;
+        this.loggedUserManagementService = loggedUserManagementService;
     }
 
-    @RequestMapping("/attractions")
-    public String attractions(@RequestParam (required = false) String name,
-                              @RequestParam (required = false) String description, Model page) {
+    @GetMapping("/main")
+    public String home(@RequestParam(required = false) String logout, Model page) {
+        if (logout != null) {
+            loggedUserManagementService.setUsername(null);
+        }
+        String username = loggedUserManagementService.getUsername();
+
+        if (username == null) {
+            return "redirect:/";
+        }
+        page.addAttribute("username", username);
+        return "main.html";
+    }
+
+    @PostMapping("/main?logout")
+    public ResponseEntity<String> logout(@RequestParam(required = false) String logout) {
+        String username = loggedUserManagementService.getUsername();
+        loggedUserManagementService.setUsername(null);
+
+        return new ResponseEntity<>("we good", HttpStatus.OK);
+    }
+
+
+    @PostMapping("/attractions")
+    public String addTouristAttraction(TouristAttraction object, Model model) {
+        service.addTouristAttraction(object);
         var attractions = service.getTouristAttractions();
-        page.addAttribute("attractions", attractions);
-        page.addAttribute("name", name);
-        page.addAttribute("description", description);
-
-        return "attraction";
+        model.addAttribute("attractions", attractions);
+        return "main";
     }
 
 
-    @GetMapping()
+    @GetMapping("/api/attractions")
     public ResponseEntity<List<TouristAttraction>> getTouristAttractions() {
         List<TouristAttraction> touristAttractions = service.getTouristAttractions();
         if (touristAttractions.isEmpty()) {
@@ -39,35 +63,34 @@ public class TouristController {
         return new ResponseEntity<>(touristAttractions, HttpStatus.OK);
     }
 
-    @GetMapping("{name}")
+    @GetMapping("/attractions/{name}")
     public ResponseEntity<TouristAttraction> getTouristAttractionByName(@PathVariable String name) {
         TouristAttraction touristAttraction = service.getTouristAttractionByName(name);
-        if (touristAttraction==null) {
+        if (touristAttraction == null) {
             return new ResponseEntity<>(touristAttraction, HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(touristAttraction, HttpStatus.OK);
         }
     }
 
-    @PostMapping("add")
-    public ResponseEntity<TouristAttraction> addTouristAttraction(@RequestBody TouristAttraction touristAttraction){
+    @PostMapping("/api/attractions")
+    public ResponseEntity<TouristAttraction> addTouristAttraction(@RequestBody TouristAttraction touristAttraction) {
         TouristAttraction addedTouristAttraction = service.addTouristAttraction(touristAttraction);
         return ResponseEntity.ok(touristAttraction);
     }
 
-    @PostMapping("update")
-    public ResponseEntity<UpdateAttractionRequest> updateTouristAttraction(@RequestBody UpdateAttractionRequest request, String name, String description){
-        System.out.println(request + " <-- initial object");
+    @PutMapping("/api/attractions/{originalName}")
+    public ResponseEntity<UpdateAttractionRequest> updateTouristAttraction(@RequestBody UpdateAttractionRequest request,
+                                                                           @PathVariable String originalName) {
         UpdateAttractionRequest updatedTouristAttraction = service.updateTouristAttraction(request, request.getNewName(), request.getNewDescription());
-        System.out.println(updatedTouristAttraction + " <-- updated object object");
         return ResponseEntity.ok(updatedTouristAttraction);
     }
 
 
-    @PostMapping("{name}")
+    @DeleteMapping("/api/attractions/{name}")
     public ResponseEntity<TouristAttraction> deleteByName(@PathVariable String name) {
         TouristAttraction touristAttraction = service.deleteByName(name);
-        if (touristAttraction==null) {
+        if (touristAttraction == null) {
             return new ResponseEntity<>(touristAttraction, HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(touristAttraction, HttpStatus.OK);

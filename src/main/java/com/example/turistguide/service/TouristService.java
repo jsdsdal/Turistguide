@@ -34,16 +34,6 @@ public class TouristService {
         return touristAttraction;
     }
 
-    public TouristAttraction updateTouristAttractionName(TouristAttraction touristAttraction, String name) {
-        repository.updateTouristAttractionName(touristAttraction, name);
-        return touristAttraction;
-    }
-
-    public TouristAttraction updateTouristAttractionDescription(TouristAttraction touristAttraction, String description) {
-        repository.updateTouristAttractionDescription(touristAttraction, description);
-        return touristAttraction;
-    }
-
     public TouristAttraction deleteByName(String name){
         return repository.deleteByName(name);
     }
