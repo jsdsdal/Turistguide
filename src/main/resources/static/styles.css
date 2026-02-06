@@ -8,12 +8,36 @@
     --textblack:#2D1D1D;
 }
 
-body{
+.david {
+    color: red;
+}
+
+body {
     background-color: var(--sitewhite);
     color: var(--textblack);
+    padding: 180px;
     font-family: "Roboto Light", sans-serif;
 }
 
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #333333;
+    display: flex;
+    justify-content: center;
+}
 
+ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+ul li a:hover {
+    background-color: #111111;
+}
 
 

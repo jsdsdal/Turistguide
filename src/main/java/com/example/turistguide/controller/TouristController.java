@@ -6,21 +6,36 @@ import com.example.turistguide.service.TouristService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("attractions")
+@Controller
 public class TouristController {
     private final TouristService service;
     public TouristController(TouristService service) {
         this.service = service;
     }
 
+    @RequestMapping("/attractions")
+    public String attractions(@RequestParam (required = false) String name,
+                              @RequestParam (required = false) String description, Model page) {
+        var attractions = service.getTouristAttractions();
+        page.addAttribute("attractions", attractions);
+        page.addAttribute("name", name);
+        page.addAttribute("description", description);
+
+        return "attraction";
+    }
+
+
     @GetMapping()
     public ResponseEntity<List<TouristAttraction>> getTouristAttractions() {
         List<TouristAttraction> touristAttractions = service.getTouristAttractions();
+        if (touristAttractions.isEmpty()) {
+            return new ResponseEntity<>(touristAttractions, HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>(touristAttractions, HttpStatus.OK);
     }
 

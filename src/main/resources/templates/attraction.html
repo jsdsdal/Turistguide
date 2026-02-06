@@ -1,21 +1,20 @@
 <!DOCTYPE html>
-<html lang="da">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="styles.css">
+    <link th:href="@{/styles.css}" rel="stylesheet">
 </head>
-
 <body>
 
 <header>
     <img src="logo.png">
-    <h1> Matador Turistguide</h1>
-    <nav>
+    <h1 class="david"> Matador Turistguide</h1>
+    <nav class="navbar">
         <ul>
-            <li>Hjem</li>
-            <li>Bestil Tur</li>
-            <li>FAQ</li>
+            <li><a href="#home">Hjem</a></li>
+            <li><a href="#tur">Bestil tur</a></li>
+            <li><a href="#FAQ">FAQ</a></li>
         </ul>
     </nav>
 
@@ -38,38 +37,21 @@
 
 <section>
     <h2>Vores højdepunkter</h2>
-    <ul>
-        <li>
-            TuristAttraktion1
-            <a href="attraction.html">
-                <button>Link</button>
-            </a>
-        </li>
-
-        <li>
-            TuristAttraktion2
-            <a href="attraction.html">
-                <button>Link</button>
-            </a>
-        </li>
-        <li>
-            TuristAttraktion3
-            <a href="attraction.html">
-                <button>Link</button>
-            </a>
-        </li>
-    </ul>
+    <table>
+        <tr>
+            <th>Forlystelsesnavn</th>
+            <th>Beskrivelse</th>
+        </tr>
+        <tr th:each="p: ${attractions}">
+            <td th:text="${p.getName()}"></td>
+            <td th:text="${p.getDescription()}"></td>
+            <td><button class="">Link</button></td>
+        </tr>
+    </table>
     <a href="/attractions">
         <button>Se alle (JSON)</button>
     </a>
-
     <h2>Tilføj forlystelse</h2>
-    <form>
-        <label for="name">Navn på forlystelses:</label><br>
-        <input type="text" id="name" name="name"><br>
-        <label for="description">Last name:</label><br>
-        <input type="text" id="description" name="description">
-    </form>
 </section>
 
 <img src="">
@@ -83,11 +65,8 @@
         <li>Adresse: Rådhuspladsen 1, 1723 København K</li>
         <li>Telefontid: hverdage 8 - 16</li>
     </ul>
-
-
 </footer>
 
+
 </body>
-
-
 </html>
